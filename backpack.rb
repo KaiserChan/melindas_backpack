@@ -15,13 +15,13 @@ class Backpack
     day_of_week = @attributes[:day_of_week]
 
     # Ensure appropriate clothing is added to backpack
-    backpack_per_weather(weather_of_the_day)
+    pack_per_weather(weather_of_the_day)
 
     # Ensure gym shoes are added to backpack if it's a gym day
-    backpack_per_gym_schedule(day_of_week)
+    pack_per_gym_schedule(day_of_week)
 
     # Bring a packed lunch on all weekdays
-    backpack_per_weekdays(day_of_week)
+    pack_per_weekdays(day_of_week)
 
   end
 
@@ -63,7 +63,7 @@ class Backpack
     day_of_week != 'saturday' && day_of_week != 'sunday'
   end
 
-  def backpack_per_weather(weather)
+  def pack_per_weather(weather)
     if weather == 'rainy'
       rainy_days_items
     elsif weather == 'cold'
@@ -73,13 +73,13 @@ class Backpack
     end
   end
 
-  def backpack_per_gym_schedule(day)
+  def pack_per_gym_schedule(day)
     if gym_days
       @items << 'gym shoes'
     end
   end
 
-  def backpack_per_weekdays(day)
+  def pack_per_weekdays(day)
     if weekdays
       @items << 'packed lunch'
     else
