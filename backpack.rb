@@ -58,3 +58,6 @@ class Backpack
   end
 
 end
+
+melindas = Backpack.new(day_of_week: 'thursday', weather: 'rainy')
+puts melindas.my_func
