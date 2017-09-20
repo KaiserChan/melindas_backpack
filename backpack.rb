@@ -29,7 +29,7 @@ class Backpack
     end
 
     # Ensure gym shoes are added to backpack if it's a gym day
-    # Gotta get to the gym on Tuesdays and Thursdays. Wait a sec...
+    # Gotta get to the gym on Mondays and Thursdays. 
     if day_of_week == 'monday' || day_of_week == 'thursday'
       #add gym shoes to items
       @items << 'gym shoes'
