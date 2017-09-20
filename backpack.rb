@@ -15,33 +15,14 @@ class Backpack
     day_of_week = @attributes[:day_of_week]
 
     # Ensure appropriate clothing is added to backpack
-    if weather_of_the_day == 'rainy'
-      @items << 'pants'
-      @items << 'shirt'
-      @items << 'umbrella'
-    elsif weather_of_the_day == 'cold'
-      @items << 'pants'
-      @items << 'shirt'
-      @items << 'jacket'
-    else
-      @items << 'pants'
-      @items << 'shirt'
-    end
+    backpack_per_weather(weather_of_the_day)
 
     # Ensure gym shoes are added to backpack if it's a gym day
-    # Gotta get to the gym on Mondays and Thursdays. 
-    if day_of_week == 'monday' || day_of_week == 'thursday'
-      #add gym shoes to items
-      @items << 'gym shoes'
-    end
+    backpack_per_gym_schedule(day_of_week)
 
     # Bring a packed lunch on all weekdays
-    if day_of_week != 'saturday' && day_of_week != 'sunday'
-      @items << 'packed lunch'
-    elsif false
-      # Used to bring snacks on weekend trips, but now I just buy 'em
-      @items << 'snacks'
-    end
+    backpack_per_weekdays(day_of_week)
+
   end
 
   # Prints a summary packing list for Melinda's backpack
@@ -55,6 +36,55 @@ class Backpack
       output << "- #{item}"
     end
     output.join("\n")
+  end
+
+  def regular_days_items
+    @items << 'pants'
+    @items << 'shirt'
+  end
+
+  def rainy_days_items
+    regular_days_items
+    @items << 'umbrella'
+  end
+
+  def cold_days_items
+    regular_days_items
+    @items << 'jacket'
+  end
+
+  def gym_days
+    day_of_week = @attributes[:day_of_week]
+    day_of_week == 'monday' || day_of_week == 'thursday'
+  end
+
+  def weekdays
+    day_of_week = @attributes[:day_of_week]
+    day_of_week != 'saturday' && day_of_week != 'sunday'
+  end
+
+  def backpack_per_weather(weather)
+    if weather == 'rainy'
+      rainy_days_items
+    elsif weather == 'cold'
+      cold_days_items
+    else
+      regular_days_items
+    end
+  end
+
+  def backpack_per_gym_schedule(day)
+    if gym_days
+      @items << 'gym shoes'
+    end
+  end
+
+  def backpack_per_weekdays(day)
+    if weekdays
+      @items << 'packed lunch'
+    else
+      @items << 'snacks'
+    end
   end
 
 end
